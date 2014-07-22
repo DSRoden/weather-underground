@@ -47,4 +47,34 @@ describe('Weather', function(){
         });
      });
    });
+   
+   describe('getAllHighs', function () {
+    it('get array of high temps', function(done) {
+        Weather.getAllHighs(37206, function(tenHighs) {
+          expect(tenHighs).to.be.instanceof(Array);
+          expect(tenHighs.length).to.equal(10);
+          done();
+        });
+     });
+   });
+  
+   describe('getAllLows', function () {
+    it('get array of low temps', function(done) {
+        Weather.getAllLows(37206, function(tenLows) {
+          expect(tenLows).to.be.instanceof(Array);
+          expect(tenLows.length).to.equal(10);
+          done();
+        });
+     });
+   });
+   
+   describe('getDeltas', function () {
+    it('get array of deltas', function(done) {
+        Weather.deltas(37206, function(deltas) {
+          expect(deltas).to.be.instanceof(Array);
+          expect(deltas.length).to.equal(10);
+          done();
+        });
+     });
+   });
 });

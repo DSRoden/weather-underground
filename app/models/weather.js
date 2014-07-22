@@ -31,7 +31,6 @@ Weather.getTenDayHighAvg = function (zip, cb) {
 
   var url = 'http://api.wunderground.com/api/66488bb7d2153c7a/forecast10day/q/' + zip + '.json';
   var sigma = 0;
-  var tenDays = [];
  
   request(url, function(error, response, body) {
       body = JSON.parse(body);
@@ -40,7 +39,7 @@ Weather.getTenDayHighAvg = function (zip, cb) {
       // console.log(forecast);
       var simpleforecast = forecast.simpleforecast;
       // console.log(simpleforecast);
-      tenDays = simpleforecast.forecastday;
+      var tenDays = simpleforecast.forecastday;
       // console.log(tenDays);
       for (var i = 0; i < tenDays.length; i++) {
         console.log(tenDays[i].high.fahrenheit);
@@ -59,7 +58,6 @@ Weather.getTenDayLowAvg = function (zip, cb) {
 
   var url = 'http://api.wunderground.com/api/66488bb7d2153c7a/forecast10day/q/' + zip + '.json';
   var sigma = 0;
-  var tenDays = [];
  
   request(url, function(error, response, body) {
       body = JSON.parse(body);
@@ -68,7 +66,7 @@ Weather.getTenDayLowAvg = function (zip, cb) {
       // console.log(forecast);
       var simpleforecast = forecast.simpleforecast;
       // console.log(simpleforecast);
-      tenDays = simpleforecast.forecastday;
+      var tenDays = simpleforecast.forecastday;
       // console.log(tenDays);
       for (var i = 0; i < tenDays.length; i++) {
         console.log(tenDays[i].low.fahrenheit);
@@ -81,5 +79,97 @@ Weather.getTenDayLowAvg = function (zip, cb) {
     cb(temp);
    });
 };
+
+
+Weather.getAllHighs = function (zip, cb) {
+
+  var url = 'http://api.wunderground.com/api/66488bb7d2153c7a/forecast10day/q/' + zip + '.json';
+ 
+  request(url, function(error, response, body) {
+      body = JSON.parse(body);
+      debugger;
+      var forecast = body.forecast;
+      var simpleforecast = forecast.simpleforecast;
+      var tenDays = simpleforecast.forecastday;
+      var tenHighs = [];
+
+      for (var i = 0; i < tenDays.length; i++) {
+        // console.log(tenDays[i].high.fahrenheit);
+        tenHighs.push(parseInt(tenDays[i].high.fahrenheit));
+      }
+      console.log(tenHighs);
+      cb(tenHighs);
+   });
+  };
+
+
+Weather.getAllLows = function (zip, cb) {
+
+  var url = 'http://api.wunderground.com/api/66488bb7d2153c7a/forecast10day/q/' + zip + '.json';
+ 
+  request(url, function(error, response, body) {
+      body = JSON.parse(body);
+      debugger;
+      var forecast = body.forecast;
+      var simpleforecast = forecast.simpleforecast;
+      var tenDays = simpleforecast.forecastday;
+      var tenLows = [];
+
+      for (var i = 0; i < tenDays.length; i++) {
+        // console.log(tenDays[i].low.fahrenheit);
+        tenLows.push(parseInt(tenDays[i].low.fahrenheit));
+      }
+      console.log(tenLows);
+      cb(tenLows);
+   });
+ };
+
+Weather.getDeltas = function (zip, cb) {
+
+  var url = 'http://api.wunderground.com/api/66488bb7d2153c7a/forecast10day/q/' + zip + '.json';
+ 
+  request(url, function(error, response, body) {
+      body = JSON.parse(body);
+      debugger;
+      var forecast = body.forecast;
+      var simpleforecast = forecast.simpleforecast;
+      var tenDays = simpleforecast.forecastday;
+      var tenLows = [];
+
+      for (var i = 0; i < tenDays.length; i++) {
+        // console.log(tenDays[i].low.fahrenheit);
+        tenLows.push(parseInt(tenDays[i].low.fahrenheit));
+      }
+      console.log(tenLows);
+      cb(tenLows);
+   });
+ };
+
+Weather.deltas = function (zip, cb) {
+
+  var url = 'http://api.wunderground.com/api/66488bb7d2153c7a/forecast10day/q/' + zip + '.json';
+ 
+  request(url, function(error, response, body) {
+      body = JSON.parse(body);
+      debugger;
+      var forecast = body.forecast;
+      var simpleforecast = forecast.simpleforecast;
+      var tenDays = simpleforecast.forecastday;
+      var deltas = [];
+
+      for (var i = 0; i < tenDays.length; i++) {
+        deltas.push(parseInt(tenDays[i].high.fahrenheit)- parseInt(tenDays[i].low.fahrenheit));
+      }
+      console.log(deltas);
+      cb(deltas);
+   });
+};
+
+
+
+
+
+
+
 
 module.exports = Weather;
