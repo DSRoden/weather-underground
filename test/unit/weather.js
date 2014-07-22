@@ -1,18 +1,30 @@
+/* jshint expr:true */
 /* global describe, it */
 
 'use strict';
+
 
 var expect = require('chai').expect;
 var Weather = require('../../app/models/weather');
 
 describe('Weather', function(){
-  describe('constructor', function(){
-      it('should create a new weather object', function(){
-            var wx = new Weather(37206);
-
-            expect(wx).to.be.instanceof(Weather);
-           // expect(wx.high).to.be.ok;
-           // expect(wx.low).to.be.ok;
-      });
+  describe('high', function () {
+    it('should get high temp', function(done) {
+        Weather.getHigh(37206, function(temp) {
+          expect(temp).to.be.ok;
+          expect(temp.length).to.be.at.least(2);
+          done();
+        });
+     });
+   });
+  
+   describe('low', function () {
+    it('should get low temp', function(done) {
+        Weather.getLow(37206, function(temp) {
+          expect(temp).to.be.ok;
+          expect(temp.length).to.be.at.least(2);
+          done();
+        });
+     });
   });
 });
