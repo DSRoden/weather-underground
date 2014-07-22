@@ -165,7 +165,31 @@ Weather.deltas = function (zip, cb) {
    });
 };
 
+Weather.moon = function(zip, cb) { 
+  var url = 'http://api.wunderground.com/api/66488bb7d2153c7a/astronomy/q/'+zip+'.json';
+    var phase;
+    request(url, function(error, response, body) {
+       body = JSON.parse(body);
+       var moonLum = parseInt(body.moon_phase.percentIlluminated);
+       console.log(moonLum);
+        if (moonLum >= 0 && moonLum <=5) {
+          phase = 'New';
+        } else if (moonLum >=6 && moonLum <=44) {
+          phase = 'Crescent';
+        } else if (moonLum >=45 && moonLum <=55) {
+          phase = 'Quarter';
+        } else if (moonLum >=56 && moonLum <=94) {
+          phase = 'Gibbous';
+        } else if (moonLum >=95 && moonLum <=100) {
+          phase = 'Full';
+        } else {
+          phase = console.log('No moon at all');
+        }
+      console.log(phase);
+      cb(phase);
+    });
 
+};
 
 
 
