@@ -68,7 +68,7 @@ describe('Weather', function(){
      });
    });
    
-   describe('getDeltas', function () {
+   describe('deltas', function () {
     it('get array of deltas', function(done) {
         Weather.deltas(37206, function(deltas) {
           expect(deltas).to.be.instanceof(Array);
@@ -77,4 +77,13 @@ describe('Weather', function(){
         });
      });
    });
+
+   describe('moon', function() {
+    it('returns phase of the moon', function(done) {
+      Weather.moon(37206, function(phase) {
+        expect(phase).to.equal('Crescent');
+        done();
+    });
+   });
+  });
 });
