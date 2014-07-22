@@ -27,4 +27,24 @@ describe('Weather', function(){
         });
      });
   });
+   
+  describe('tenDayHighAvg', function () {
+    it('should get average of 10 day high temps', function(done) {
+        Weather.getTenDayHighAvg(37206, function(temp) {
+          expect(temp).to.be.ok;
+          expect(temp.length).to.be.at.least(2);
+          done();
+        });
+     });
+   });
+  
+   describe('tenDayLowAvg', function () {
+    it('should get average of 10 day low temps', function(done) {
+        Weather.getTenDayLowAvg(37206, function(temp) {
+          expect(temp).to.be.ok;
+          expect(temp.length).to.be.at.least(2);
+          done();
+        });
+     });
+   });
 });
